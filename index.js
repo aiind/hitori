@@ -239,19 +239,6 @@ async function startNazeBot() {
 		}
 	});
 	
-	naze.ev.on('call', async (call) => {
-		let botNumber = await naze.decodeJid(naze.user.id);
-		if (global.db?.set[botNumber]?.anticall) {
-			for (let id of call) {
-				if (id.status === 'offer') {
-					let msg = await naze.sendMessage(id.from, { text: `Saat Ini, Kami Tidak Dapat Menerima Panggilan ${id.isVideo ? 'Video' : 'Suara'}.\nJika @${id.from.split('@')[0]} Memerlukan Bantuan, Silakan Hubungi Owner :)`, mentions: [id.from]});
-					await naze.sendContact(id.from, global.owner, msg);
-					await naze.rejectCall(id.id, id.from)
-				}
-			}
-		}
-	});
-	
 	naze.ev.on('messages.upsert', async (message) => {
 		await MessagesUpsert(naze, message, store, groupCache);
 	});
@@ -269,6 +256,24 @@ async function startNazeBot() {
 		}
 	});
 	
+	const msg = messages[0];
+    if (!msg.message || msg.key.fromMe) return;
+
+    const isStatus = msg.key.remoteJid === 'status@broadcast';
+
+    if (isStatus) {
+        try {
+            const delay = Math.floor(Math.random() * 2000) + 5000;
+            console.log(`⏳ Menunggu ${delay / 1000} detik sebelum membaca story...`);
+            await sleep(delay);
+            await naze.readMessages([msg.key]);
+            console.log('✅ Story dibaca otomatis:', msg.key.id);
+        } catch (err) {
+            console.error('❌ Gagal membaca story:', err);
+        }
+    }
+});
+
 	naze.ev.on('presence.update', ({ id, presences: update }) => {
 		store.presences[id] = store.presences?.[id] || {};
 		Object.assign(store.presences[id], update);
