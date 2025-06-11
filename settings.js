@@ -9,7 +9,7 @@ const chalk = require('chalk');
 
 //~~~~~~~~~~~~< GLOBAL SETTINGS >~~~~~~~~~~~~\\
 
-global.owner = ['6283197549290'] //['628','628'] 2 owner atau lebih
+global.owner = ['6283131688812'] //['628','628'] 2 owner atau lebih
 global.packname = 'Whatsapp'
 global.author = 'Private-Bot'
 global.botname = 'BotV3'
@@ -18,7 +18,7 @@ global.listv = ['•','●','■','✿','▲','➩','➢','➣','➤','✦','✧
 global.tempatDB = 'database.json' // Taruh url mongodb di sini jika menggunakan mongodb. Format : 'mongodb+srv://...'
 global.tempatStore = 'baileys_store.json' // Taruh url mongodb di sini jika menggunakan mongodb. Format : 'mongodb+srv://...'
 global.pairing_code = true
-global.number_bot = '6283197549290' // Kalo pake panel bisa masukin nomer di sini, jika belum ambil session. Format : '628xx'
+global.number_bot = '6283131688812' // Kalo pake panel bisa masukin nomer di sini, jika belum ambil session. Format : '628xx'
 
 global.fake = {
 	anonim: 'https://telegra.ph/file/95670d63378f7f4210f03.png',
